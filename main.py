@@ -26,6 +26,8 @@ for i in range(len(tickers)):
     close_prices = close_prices[len(close_prices) - DAYS: ]
     portfolio_close_prices.append(close_prices)
 portfolio_close_prices = np.array(portfolio_close_prices)
+
+# Converting the x-values into a list of numbers from one to the number of days
 days = np.array([i+1 for i in range(DAYS)])
 
 
@@ -40,5 +42,7 @@ for i in range(len(tickers)):
     slopes.append(reg.coef_[0])
 
 momentums = [slopes[i] * r_squares[i] for i in range(len(slopes))]
+absolute_momentums = [abs(i) for i in momentums]
 
 print(momentums)
+print(absolute_momentums)
