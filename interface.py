@@ -1,6 +1,6 @@
+import sklearn
 import streamlit as st
 from sklearn.metrics import r2_score
-from sklearn.linear_model import LinearRegression
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -35,7 +35,7 @@ portfolio_pct_change = np.cumsum(portfolio_pct_change) * 100
 # Calculating the linear regression line (slopes and the R-square)
 slopes = []
 r_squares = []
-reg = LinearRegression().fit(days.reshape(DAYS, 1), np.array(
+reg = sklearn.linear_model.LinearRegression().fit(days.reshape(DAYS, 1), np.array(
     portfolio_pct_change).reshape(DAYS, 1))
 y_pred = reg.predict(days.reshape(-1, 1))
 r_squares.append(r2_score(portfolio_pct_change, y_pred))
