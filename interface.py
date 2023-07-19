@@ -1,6 +1,6 @@
-import sklearn
 import streamlit as st
 from sklearn.metrics import r2_score
+from sklearn.linear_model import LinearRegression
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -35,7 +35,7 @@ portfolio_pct_change = np.cumsum(portfolio_pct_change) * 100
 # Calculating the linear regression line (slopes and the R-square)
 slopes = []
 r_squares = []
-reg = sklearn.linear_model.LinearRegression().fit(days.reshape(DAYS, 1), np.array(
+reg = LinearRegression().fit(days.reshape(DAYS, 1), np.array(
     portfolio_pct_change).reshape(DAYS, 1))
 y_pred = reg.predict(days.reshape(-1, 1))
 r_squares.append(r2_score(portfolio_pct_change, y_pred))
@@ -45,7 +45,7 @@ slopes.append(reg.coef_[0][0])
 momentums = [slopes[i] * r_squares[i] for i in range(len(slopes))]
 absolute_momentums = [abs(i) for i in momentums]
 
-fig = px.line(portfolio_pct_change, title=f'Cumulative Percent change of {ticker}', labels={
+fig = px.line(portfolio_pct_change, title=f'Cumulative Prcent change of {ticker}', labels={
     "index": "Number of Days", 
     "value": "Cumulative Percent Change", 
     "variable": "Legend"
